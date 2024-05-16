@@ -4,11 +4,13 @@ const port = 3000;
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const crearStrings = require('./funcionalidades.js');
 
 app.use(cors({
     origin: '*'
 }));
 
+crearStrings()
 app.get('/', (req, res) => {
     res.send('¡Hola, Mundo!');
 });
@@ -24,6 +26,7 @@ app.get('/data-elements', (req, res) => {
             console.error("Error en lectura de carpeta: ", err)
             return res.status(500).send('Error al leer carpeta')
         }
+
         let id = 0
 
         const promesasDeLectura = archivos.map(archivo => {
@@ -37,7 +40,7 @@ app.get('/data-elements', (req, res) => {
                     const arrayUrlsImgs = archivosImgs.map(nombreImagen => {
                         id++
                         let separacionDePartes = nombreImagen.split('_')
-                        let texto_español = separacionDePartes[1].split('.')[0] 
+                        let texto_español = separacionDePartes[1]?.split('.')[0]
                         let texto_ingles = separacionDePartes[0]
                         return (
                             {
@@ -45,7 +48,7 @@ app.get('/data-elements', (req, res) => {
                                 url: `/media/${archivo}/${nombreImagen}`,
                                 /* CONVIERTE PRIMER LETRA EN MAYUSCULAS, Y ELIMINA EXTENSION, TOMANDO EL NOMBRE DE LA IMAGEN COMO NOMBRE PRINCIPAL */
                                 ing:`${texto_ingles.charAt(0).toUpperCase() + texto_ingles.slice(1).replace(/\.[^.]+$/, '')}`,
-                                esp: `${texto_español.charAt(0).toUpperCase() + texto_español.slice(1).replace(/\.[^.]+$/, '')}`,
+                                esp: `${texto_español?.charAt(0).toUpperCase() + texto_español?.slice(1).replace(/\.[^.]+$/, '')}`,
                                 activo:false
                             }
                         )
