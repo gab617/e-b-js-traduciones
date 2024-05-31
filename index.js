@@ -90,6 +90,10 @@ app.get('/completed', (req, res)=>{
     res.sendFile(imagePath)
 })
 
+app.get('/ping', (req, res) => {
+    console.log(`ping`);
+    res.status(200).send('pong traducc')
+  });
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
