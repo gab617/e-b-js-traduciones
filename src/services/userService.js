@@ -85,7 +85,7 @@ const authenticateUser = async (userData) => {
 };
 
 const getAllUsers = async () => {
-  const query = "SELECT user_id, user_handle, points FROM users";
+  const query = "SELECT user_id, user_handle, best_racha, points FROM users";
   return new Promise((resolve, reject) => {
     db.query(query, (err, results) => {
       if (err) return reject(err);
@@ -107,7 +107,8 @@ const updatePoints = async (userData) => {
     newPointsUser,
     userData.userData.points,
     id,
-    newPointsUser,newRacha,
+    newPointsUser,
+    newRacha,
     " desdes"
   );
 
@@ -131,6 +132,10 @@ const updatePoints = async (userData) => {
       resolve(results);
     });
   });
+};
+
+const pingDB = async () => {
+  
 };
 
 module.exports = {

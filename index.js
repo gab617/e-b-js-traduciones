@@ -6,6 +6,7 @@ const fs = require("fs")
 const path = require("path")
 const findElementById = require("./funcionalidades")
 const userController = require('./src/controllers/userController')
+const BDDController = require('./src/controllers/BDController')
 
 app.use(express.json())
 app.use(
@@ -165,13 +166,13 @@ app.post('/register', userController.register)
 app.post('/login', userController.login)
 app.get('/users-data', userController.getUsers)
 app.put('/upl-points', userController.uploadPointsUser)
+app.get("/pingBDD",BDDController.verifyBDD)
 
 
 
 
 
 app.get("/ping", (req, res) => {
-  console.log(`ping`)
   res.status(200).send("pong traducc")
 })
 

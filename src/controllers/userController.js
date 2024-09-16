@@ -31,6 +31,10 @@ const register = async (req, res) => {
   }
 };
 
+const pingDB =(req,res)=>{
+  
+}
+
 const login = async (req, res) => {
   try {
     const result = await userService.authenticateUser(req.body);
